@@ -10,15 +10,28 @@ def calc_ruby(string)
   keyword_hash = {"add" => :+, "subtract" => :-, "multiply" => :*, "plus" => :+, 
     "minus" => :-, "power" => :**, "divide" => :/, "divided" => :/}
   calculate_array = []
-  input_array = string.split(" ")
-  input_array.each do |word|
-    if keyword_hash.keys.include?(word)
-      calculate_array << keyword_hash[word]
-    elsif /\d/.match(word)
-      calculate_array << word.to_f
+  question = []
+  # input_array = string.split(" ")
+  input_array = string.scan(/[\w'\s]+/)
+  
+  input_array.each do |x| 
+    x.split(" ") 
+    question << x
+    puts question.to_s + " here1 "
+    puts input_array.to_s + " here2 "
+    puts question.to_s + " here3 " 
+
+    question.each do |word| 
+      question = question.shift.split(" ")
+      if keyword_hash.keys.include?(word)
+        calculate_array << keyword_hash[word]
+      elsif /\d/.match(word)
+        calculate_array << word.to_f
+      end
+      puts question.join
     end
+    puts eval(calculate_array.join)
   end
-  print eval(calculate_array.join)
 end
 
-calc_ruby("7 to the power of 10")
+calc_ruby("What is 4 to the power of 4? What is 4 plus 4?")
